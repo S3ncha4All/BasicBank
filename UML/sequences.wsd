@@ -1,0 +1,33 @@
+@startuml
+skinparam actorStyle awesome
+
+title "Basic-Bank Sequenzen"
+
+actor Kunde as k
+actor Bankmitarbeiter as b
+participant Server as s
+participant Keycloak as kc
+database Datenbank as db
+
+== Registrierung/Neues Konto anfragen ==
+k -> s : Registrierungsanfrage (POST[mail, name, bday])
+s -> db : Speichern der Registrierungsdaten
+s -> k : Registrierungsanfrage bestätigt
+
+== Registrierung/Neues Konto durch Mitarbeiter bestätigen ==
+b -> s : Abfragen aller offenen Registrierungsanfragen (GET)
+s -> db : Abfragen aller offenen Registrierungsanfragen
+db -> s : Alle offenen Registrierungsanfragen
+s -> b : Alle offenen Registrierungsanfragen
+b -> s : Freigabe der Registrierunganfrage (PATCH[Vorgangsnummer, approver])
+s -> kc : Neuen User in ID-System anlegen
+s -> db : Registrierunganfrage als erldigt markieren
+s -> b : Freigabe erfolgreich
+
+== Neue Transaktion vornehmen ==
+k -> s : Neue Transaktion vornehmen
+s -> db : Kontostand abfragen
+db -> s : Kontostand liefern
+s -> s :
+
+@enduml

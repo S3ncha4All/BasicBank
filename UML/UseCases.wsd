@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+
+title "Basic-Bank Anwendungsfälle"
+
+actor Kunde as k
+package Kunden-UseCases {
+    usecase "Registrieren" as si
+    usecase "Anmelden" as li
+    usecase "Kundendaten bearbeiten" as cb
+    usecase "Neues Konto beantragen" as nc
+    usecase "Transaktion vornehmen" as tr
+    usecase "Transaktionen einsehen" as th
+    usecase "Konto löschen" as lo
+    usecase "Abmelden" as lo
+}
+k --> si
+k --> li
+k --> nc
+k --> tr
+k --> lo
+k --> cb
+k --> th
+
+actor Bankmitarbeiter as b
+package Bankmitarbeiter-UseCases  {
+    usecase "Kontobeantragung bearbeiten" as bb
+    usecase "Neukunde aufnehmen" as cn
+}
+b --> bb
+b-> cn
+
+actor Admin as a
+package Admin-UseCases  {
+    usecase "Mitarbeiterkonto anlegen" as ma
+}
+a --> ma
+
+@enduml

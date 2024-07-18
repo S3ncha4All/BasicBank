@@ -1,0 +1,18 @@
+version: "0.1"
+name: basic-bank
+
+volumes:
+  basic-bank_volume:
+services:
+  basic-bank_postgres:
+    image: "postgres:alpine3.20"
+    container_name: basic-bank_postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - basic-bank_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=basic_bank_local
+      - POSTGRES_USER=blubb
+      - POSTGRES_PASSWORD=blubb
+      - PGDATA=/var/lib/postgresql/data/pgdata
